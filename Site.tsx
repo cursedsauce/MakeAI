@@ -1,6 +1,6 @@
 "use client"
 
-// Long Exposure Agency Template — a whole automation-agency site in one file:
+// MakeAI — a whole automation-agency site in one file:
 // a full-screen pale page, a quiet serif, ink buttons, and every picture a long-exposure
 // blur of some landscape that was never photographed.
 //
@@ -52,10 +52,10 @@ export type LxFaq = { question: string; answer: string }
 export type LxColumn = { title: string; links: LxLink[] }
 export type LxBooking = { name: string; email: string; company: string; message: string; date: string; time: string }
 
-export type LongExposureAgencyTemplateProps = {
+export type SiteProps = {
   /** Word beside the dotted mark in the nav and footer. */
   brand?: string
-  /** In-template hrefs: `#cases`, `#case:<id>`, `#home`, `#book`, `#404`, or a home section (`#services`, `#process`, `#about`, `#work`, `#insights`, `#faq`). */
+  /** In-site hrefs: `#cases`, `#case:<id>`, `#home`, `#book`, `#404`, or a home section (`#services`, `#process`, `#about`, `#work`, `#insights`, `#faq`). */
   nav?: LxLink[]
   navCta?: LxLink
   hero?: {
@@ -1070,7 +1070,7 @@ function ClientLockup({ name, mark, serif, size = 22 }: { name: string; mark?: n
 
 const TIMES = ["09:30", "11:00", "14:00", "16:30"]
 
-function BookDialog({ open, onClose, onBook, brand }: { open: boolean; onClose: () => void; onBook?: LongExposureAgencyTemplateProps["onBook"]; brand: string }) {
+function BookDialog({ open, onClose, onBook, brand }: { open: boolean; onClose: () => void; onBook?: SiteProps["onBook"]; brand: string }) {
   const ui = useUI()
   const days = React.useMemo(() => nextWeekdays(new Date(), 5), [open])
   const [day, setDay] = React.useState(0)
@@ -1291,7 +1291,7 @@ function CaseCard({ c, go, index }: { c: LxCase; go: Go; index: number }) {
   )
 }
 
-function Hero({ hero, word, go }: { hero: NonNullable<LongExposureAgencyTemplateProps["hero"]>; word: string; go: Go }) {
+function Hero({ hero, word, go }: { hero: NonNullable<SiteProps["hero"]>; word: string; go: Go }) {
   const ui = useUI()
   const people = ["Maya Lindqvist", "Arjun Mehta", "Sofia Brandt"]
   return (
@@ -1643,7 +1643,7 @@ function Faq({ kicker, title, items }: { kicker: string; title: string; items: L
   )
 }
 
-function CtaBand({ cta, go }: { cta: NonNullable<LongExposureAgencyTemplateProps["cta"]>; go: Go }) {
+function CtaBand({ cta, go }: { cta: NonNullable<SiteProps["cta"]>; go: Go }) {
   return (
     <section className="lx-cta-wrap" data-lx-sec="contact">
       <FieldCanvas field={cta.field ?? "noir"} salt="cta" live track className="lx-cta lx-rv">
@@ -1674,7 +1674,7 @@ function LangSwitch({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void 
   )
 }
 
-function Footer({ brand, footer, go, theme, setTheme, lang, setLang }: { brand: string; footer: NonNullable<LongExposureAgencyTemplateProps["footer"]>; go: Go; theme: Theme; setTheme: (t: Theme) => void; lang: Lang; setLang: (l: Lang) => void }) {
+function Footer({ brand, footer, go, theme, setTheme, lang, setLang }: { brand: string; footer: NonNullable<SiteProps["footer"]>; go: Go; theme: Theme; setTheme: (t: Theme) => void; lang: Lang; setLang: (l: Lang) => void }) {
   const ui = useUI()
   return (
     <footer className="lx-footer">
@@ -1882,7 +1882,7 @@ function NotFound({ go }: { go: Go }) {
 
 /* ------------------------------------------------------------------ main */
 
-function Template({
+function SiteInner({
   lang,
   setLang,
   brand = DEFAULT_BRAND,
@@ -1910,7 +1910,7 @@ function Template({
   maxWidth = "1120px",
   height = "100svh",
   className,
-}: LongExposureAgencyTemplateProps & { lang: Lang; setLang: (l: Lang) => void }) {
+}: SiteProps & { lang: Lang; setLang: (l: Lang) => void }) {
   const ui = useUI()
   const rootRef = React.useRef(null as HTMLDivElement | null)
   const reduced = useReducedMotion()
@@ -2156,7 +2156,7 @@ function Template({
   )
 }
 
-export default function LongExposureAgencyTemplate(props: LongExposureAgencyTemplateProps) {
+export default function Site(props: SiteProps) {
   const [lang, setLangState] = React.useState((): Lang => readLang(props.defaultLang ?? "auto"))
   const setLang = (l: Lang) => {
     setLangState(l)
@@ -2168,12 +2168,12 @@ export default function LongExposureAgencyTemplate(props: LongExposureAgencyTemp
   React.useEffect(() => {
     document.documentElement.lang = ui.htmlLang
   }, [ui.htmlLang])
-  const given = Object.fromEntries(Object.entries(props).filter(([, v]) => v !== undefined)) as LongExposureAgencyTemplateProps
+  const given = Object.fromEntries(Object.entries(props).filter(([, v]) => v !== undefined)) as SiteProps
   const merged = lang === "ru" ? { ...ruProps(given.brand ?? DEFAULT_BRAND), ...given } : given
   const ctx = React.useMemo(() => ({ lang, ui }), [lang, ui])
   return (
     <LangCtx.Provider value={ctx}>
-      <Template {...merged} lang={lang} setLang={setLang} />
+      <SiteInner {...merged} lang={lang} setLang={setLang} />
     </LangCtx.Provider>
   )
 }

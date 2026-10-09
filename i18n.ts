@@ -1,6 +1,6 @@
-// Interface strings and the Russian version of the template's default content.
-// English lives in long-exposure-agency-template.tsx; this file adds the other language.
-import type { LongExposureAgencyTemplateProps } from "./long-exposure-agency-template"
+// Interface strings and the Russian version of the site's default content.
+// English lives in Site.tsx; this file adds the other language.
+import type { SiteProps } from "./Site"
 
 export type Lang = "en" | "ru"
 
@@ -215,7 +215,7 @@ export const UI_RU: UIStrings = {
 export const UI: Record<Lang, UIStrings> = { en: UI_EN, ru: UI_RU }
 
 /** The template's default content, in Russian. Anything the host passes explicitly still wins. */
-export function ruProps(brand: string): LongExposureAgencyTemplateProps {
+export function ruProps(brand: string): SiteProps {
   return {
     nav: [
       { label: "Кейсы", href: "#cases" },

@@ -459,7 +459,6 @@ const DEFAULT_SERVICES: LxService[] = [
     points: ["Built on the tools you already pay for", "Every run logged and retryable", "A person pinged only when judgement is needed"],
     flow: ["Checkout", "Warehouse", "Carrier", "Inbox"],
     field: "ember",
-    metric: "11 → 2 touchpoints per order",
   },
   {
     title: "AI agents",
@@ -467,7 +466,6 @@ const DEFAULT_SERVICES: LxService[] = [
     points: ["Grounded in your own data, not guesses", "Clear hand-off rules you control", "Weekly review of every decision"],
     flow: ["Email", "Agent", "CRM", "Review"],
     field: "dusk",
-    metric: "68% of tickets resolved",
   },
   {
     title: "System integrations",
@@ -475,7 +473,6 @@ const DEFAULT_SERVICES: LxService[] = [
     points: ["Two-way sync, not nightly exports", "Conflicts caught before they spread", "Documented so your team can own it"],
     flow: ["Store", "Ledger", "CRM", "Slack"],
     field: "glacier",
-    metric: "14 spreadsheets retired",
   },
   {
     title: "Reporting & insight",
@@ -483,7 +480,6 @@ const DEFAULT_SERVICES: LxService[] = [
     points: ["One definition of every metric", "Commentary drafted for you", "Alerts when a number drifts"],
     flow: ["Ads", "Warehouse", "Model", "Dashboard"],
     field: "moss",
-    metric: "4 days → 0 on reporting",
   },
 ]
 
